@@ -1,4 +1,4 @@
-package com.project.csv;
+package com.project;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,11 +9,12 @@ import java.util.Map;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import com.project.csv.Neighbor;
 
 public class leitorrcsv {
 
     public static void main(String[] args) {
-        String file = "src/main/java/com/project/csv/planilha.csv";
+        String file = "src/main/java/com/project/csv/csv.csv";
 
         Map<Integer, List<Neighbor>> graph = new HashMap<>();
 
