@@ -2,7 +2,9 @@ package com.project.csv;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.opencsv.CSVReader;
@@ -15,25 +17,41 @@ public class Reader {
 
         try (CSVReader reader = new CSVReader(new FileReader(csv))) {
             String[] columns;
-            Map<Integer, String> municipios = createMap();
+            Map<String, List<Dados>> municipioDadosMap = new HashMap<>();
 
             while ((columns = reader.readNext()) != null) {
                 int node = tryParseInt(columns[0]);
                 String origin = columns[1];
-                int neighbor = tryParseInt(columns[2]);
+                String neighbor = (columns[2]);
                 double distance = tryParseDouble(columns[3]);
 
-                String municipio = municipios.getOrDefault(node, "Municipio não localizado.");
+                String municipio = buscarMunicipio(node);
 
-                System.out.println("Node: " + node + ", Origem: " + origin + ", vizinho: " + neighbor +
-                                    ", distancia: " + distance + ", municipio: " + municipio);
-                
+                Dados dados = new Dados(node, origin, node, distance, municipio);
+
+                municipioDadosMap.computeIfAbsent(municipio, k -> new ArrayList<>()).add(dados);
             }
+
+        municipioDadosMap.forEach((municipio, dadosList) -> {
+            System.out.println("Municipio: " + municipio);
+            for (Dados dados : dadosList) {
+                System.out.println("Node: " + dados.getNode() + ", origem: " + dados.getOrigin() + ", vizinho: " + dados.getNeighbor() + ", distancia: " + dados.getDistance());
+
+            }
+
+        });
 
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
+    }
+
+
+    private static String buscarMunicipio(int node) {
+        Map<Integer, String> municipios = new HashMap<>();
+        municipios.put(1, "Municipio_A");
+        return municipios.getOrDefault(node, "Municipio_desconhecido");
     }
 
     private static int tryParseInt(String value) {
@@ -50,13 +68,6 @@ public class Reader {
         } catch (NumberFormatException e) {
             return 0.0;
         }
-    }
-
-    private static Map<Integer, String> createMap() {
-        Map <Integer, String> municipios = new HashMap<>();
-        municipios.putAll(municipios);
-        return municipios;
-
     }
 
 }
