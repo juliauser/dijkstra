@@ -1,8 +1,8 @@
 package com.project.dijkstra;
 
 import com.project.dijkstra.Dijkstra;
-import com.project.dijkstra.Graph;
-import com.project.dijkstra.Node;
+import com.project.dijkstra.Grafo;
+import com.project.dijkstra.No;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,12 +15,12 @@ class DijkstraApplicationTests {
 
 	@Test
 	public static void main(String[] args) {
-        Node nodeA = new Node("A");
-        Node nodeB = new Node("B");
-        Node nodeC = new Node("C");
-        Node nodeD = new Node("D");
-        Node nodeE = new Node("E");
-        Node nodeF = new Node("F");
+        No nodeA = new No("A");
+        No nodeB = new No("B");
+        No nodeC = new No("C");
+        No nodeD = new No("D");
+        No nodeE = new No("E");
+        No nodeF = new No("F");
 
         nodeA.addDestination(nodeB, 10);
         nodeA.addDestination(nodeC, 15);
@@ -48,13 +48,13 @@ class DijkstraApplicationTests {
 
         //after the calculation the shortest path distance attributes are set for each node in the graph
     
-        List <Node> shortestPathForNodeB = Arrays.asList(nodeA);
-        List <Node> shortestPathForNodeC = Arrays.asList(nodeA);
-        List <Node> shortestPathForNodeD = Arrays.asList(nodeA, nodeB);
-        List <Node> shortestPathForNodeE = Arrays.asList(nodeA, nodeB, nodeD);
-        List <Node> shortestPathForNodeF = Arrays.asList(nodeA, nodeB, nodeD);
+        List <No> shortestPathForNodeB = Arrays.asList(nodeA);
+        List <No> shortestPathForNodeC = Arrays.asList(nodeA);
+        List <No> shortestPathForNodeD = Arrays.asList(nodeA, nodeB);
+        List <No> shortestPathForNodeE = Arrays.asList(nodeA, nodeB, nodeD);
+        List <No> shortestPathForNodeF = Arrays.asList(nodeA, nodeB, nodeD);
 
-        for (Node node : graph.getNodes()) {
+        for (No node : graph.getNodes()) {
             switch (node.getName()) {
                 case "B":
                     assertTrue(node.getShortestPath().equals(shortestPathForNodeB));

@@ -7,59 +7,59 @@ import java.util.Set;
 
 public class Dijkstra {
 
-    public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+    //retorna o grafo com 
+    public static Grafo calcularCaminhoMaisCurto(Grafo grafo, No origem) {
         
-        source.setDistance(0);
+        origem.setDistancia(0);
 
-        Set<Node> settledNodes = new HashSet<>();
-        Set<Node> unsettledNodes = new HashSet<>();
+        Set<No> nosVisitados = new HashSet<>();
+        Set<No> nosNaoVisitados = new HashSet<>();
 
-        unsettledNodes.add(source);
+        nosNaoVisitados.add(origem);
 
-        while (unsettledNodes.size() != 0) {
-            Node currentNode = getLowestDistanceNode(unsettledNodes);
-            unsettledNodes.remove(currentNode);
+        while (!nosNaoVisitados.isEmpty()) {
+            No noAtual = obterNoComMenorDistancia(nosNaoVisitados);
+            nosNaoVisitados.remove(noAtual);
 
-            //java.util.map.entry
-            for (Entry <Node, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-                Node adjacentNode = adjacencyPair.getKey();
-                Integer edgeWeigh = adjacencyPair.getValue();
+            for (Entry <No, Integer> parAdjacencia : noAtual.getNosAdjacentes().entrySet()) {
+                No noAdjacente = parAdjacencia.getKey();
+                Integer pesoAresta = parAdjacencia.getValue();
                 
-                if (!settledNodes.contains(adjacentNode)) {
-                    calculateMinimumDistance(adjacentNode, edgeWeigh, currentNode);
-                    unsettledNodes.add(adjacentNode);
+                if (!nosVisitados.contains(noAdjacente)) {
+                    calcularDistanciaMinima(noAdjacente, pesoAresta, noAtual);
+                    nosNaoVisitados.add(noAdjacente);
                 }
             }
-            settledNodes.add(currentNode);
+            nosVisitados.add(noAtual);
         }
-        return graph;
+        return grafo;
     }
 
-    //returns the node with the lowest distance from the unsettled nodes set
-    private static Node getLowestDistanceNode(Set <Node> unsettledNodes) {
-        Node lowestDistanceNode = null;
-        int lowestDistance = Integer.MAX_VALUE;
+    //Retorna o nó com a menor distância do conjunto de nós não visitados
+    private static No obterNoComMenorDistancia(Set <No> nosNaoVisitados) {
+        No noComMenorDistancia = null;
+        int menorDistancia = Integer.MAX_VALUE;
         
-        for (Node node: unsettledNodes) {
-            int nodeDistance = node.getDistance();
+        for (No no : nosNaoVisitados) {
+            int distanciaNo = no.getDistancia();
             
-            if(nodeDistance < lowestDistance) {
-                lowestDistance = nodeDistance;
-                lowestDistanceNode = node;
+            if(distanciaNo < menorDistancia) {
+                menorDistancia = distanciaNo;
+                noComMenorDistancia = no;
             }
         }
-        return lowestDistanceNode;
+        return noComMenorDistancia;
     }
 
-    //compares the actual distancce with the newly calculated one while following the newli explored path
-    private static void calculateMinimumDistance(Node evaluationNode, Integer edgeWeigh, Node sourceNode) {
-        Integer sourceDistance = sourceNode.getDistance();
+    //compara a distancia atual com a recem calculada enquanto segue o novo caminho explorado
+    private static void calcularDistanciaMinima(No noAvaliado, Integer pesoAresta, No noOrigem) {
+        Integer distanciaOrigem = noOrigem.getDistancia();
 
-        if(sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-            evaluationNode.setDistance(sourceDistance + edgeWeigh);
-            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-            shortestPath.add(sourceNode);
-            evaluationNode.setShortestPath(shortestPath);
+        if (distanciaOrigem + pesoAresta < noAvaliado.getDistancia()) {
+            noAvaliado.setDistancia(distanciaOrigem + pesoAresta);
+            LinkedList<No> caminhoMaisCurto = new LinkedList<>(noOrigem.getCaminhoMaisCurto());
+            caminhoMaisCurto.add(noOrigem);
+            noAvaliado.setCaminhoMaisCurto(caminhoMaisCurto);
         }
     }
 
