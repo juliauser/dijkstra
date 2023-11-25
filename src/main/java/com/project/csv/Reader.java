@@ -27,19 +27,28 @@ public class Reader {
 
                 String municipio = buscarMunicipio(node);
 
-                Dados dados = new Dados(node, origin, node, distance, municipio);
+                Dados dados = new Dados(node, origin, neighbor, distance, municipio);
 
                 municipioDadosMap.computeIfAbsent(municipio, k -> new ArrayList<>()).add(dados);
             }
 
-        municipioDadosMap.forEach((municipio, dadosList) -> {
-            System.out.println("Municipio: " + municipio);
-            for (Dados dados : dadosList) {
-                System.out.println("Node: " + dados.getNode() + ", origem: " + dados.getOrigin() + ", vizinho: " + dados.getNeighbor() + ", distancia: " + dados.getDistance());
+            municipioDadosMap.forEach((node, dadosList) -> {
+                System.out.println(node + ", " + dadosList.get(0).getOrigin() + ", ");
+                for (Dados dados : dadosList) {
+                    System.out.println(dados.getNeighbor() + " - " + dados.getDistance() + " km, ");
+                } 
+                System.out.println();
+            });
 
-            }
+        //* municipioDadosMap.forEach((municipio, dadosList) -> {
+       //     System.out.println("Municipio: " + municipio);
+     //       for (Dados dados : dadosList) {
+  ///              System.out.println("Node: " + dados.getNode() + ", origem: " + dados.getOrigin() + ", vizinho: " + dados.getNeighbor() + ", distancia: " + dados.getDistance() + "km");
+//
+           // }
 
-        });
+        // }); 
+        
 
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
@@ -47,11 +56,29 @@ public class Reader {
 
     }
 
-
     private static String buscarMunicipio(int node) {
         Map<Integer, String> municipios = new HashMap<>();
-        municipios.put(1, "Municipio_A");
+        municipios.put(1, "Municipio node 01");
         return municipios.getOrDefault(node, "Municipio_desconhecido");
+    }
+
+    public static String formatarSaida(String municipio, List<Dados> dadosList) {
+        StringBuilder resultado = new StringBuilder();
+        resultado.append(municipio).append(": ");
+
+        for (Dados dados : dadosList) {
+            resultado.append(dados.getOrigin())
+                .append(" (").append(dados.getNeighbor()).append(") - ")
+                .append(dados.getDistance()).append(" km, ");
+        }
+
+        //remove a virgula do final
+        if (resultado.length() > 0) {
+            resultado.setLength(resultado.length() - 2);
+        }
+
+        return resultado.toString();
+
     }
 
     private static int tryParseInt(String value) {
