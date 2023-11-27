@@ -1,5 +1,11 @@
 package com.project.csv;
 
+import com.project.dijkstra.Grafo;
+import com.project.dijkstra.No;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,59 +13,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-
 public class Leitor {
+    private static final String csv = "src/main/java/com/project/csv/csv.csv";
 
-    public static void main(String[] args) {
-        String csv = "src/main/java/com/project/csv/csv.csv";
-
+    public static void LerCSVAdicionarAoGrafo(Grafo grafo, String csv) {
         try (CSVReader reader = new CSVReader(new FileReader(csv))) {
             String[] colunas;
-            Map<String, List<Dados>> municipioDadosMap = new HashMap<>();
 
             while ((colunas = reader.readNext()) != null) {
-                int node = tryParseInt(colunas[0]);
-                String origem = colunas[1];
-                String vizinho = (colunas[2]);
-                double distancia = tryParseDouble(colunas[3]);
+                String origem = colunas[0];
+                String adjacente = (colunas[1]);
+                double distancia = tryParseDouble(colunas[2]);
 
-                String municipio = buscarMunicipio(node);
+                No no = grafo.getNoPeloNome(origem);
+                if (no == null) {
+                    no = new No(origem);
+                    grafo.adicionarNo(no);
+                }
 
-                Dados dados = new Dados(node, origem, vizinho, distancia, municipio);
+                No noAdjacente = grafo.getNoPeloNome(adjacente);
+                if (noAdjacente == null) {
+                    noAdjacente = new No(adjacente);
+                    grafo.adicionarNo(noAdjacente);
+                }
 
-                municipioDadosMap.computeIfAbsent(municipio, k -> new ArrayList<>()).add(dados);
+
+                grafo.adicionarAresta(no, noAdjacente, distancia);
+
+                no.adicionarDestino(noAdjacente, distancia);
             }
-
-            municipioDadosMap.forEach((municipio, dadosList) -> {
-                System.out.println(municipio + ", " + dadosList.get(0).getOrigem() + ", ");
-                for (Dados dados : dadosList) {
-                    System.out.print(dados.getVizinho() + " - " + dados.getDistancia() + " km, ");
-                } 
-                System.out.println();
-            });
-
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
-
     }
 
-    private static String buscarMunicipio(int node) {
-        Map<Integer, String> municipios = new HashMap<>();
-        municipios.put(1, "Município Node 01");
-        return municipios.getOrDefault(node, "Município_Desconhecido");
-    }
-
-    public static String formatarSaida(String municipio, List<Dados> dadosList) {
+    public static String formatarSaida(String grafo, List<Grafo> grafoList) {
         StringBuilder resultado = new StringBuilder();
-        resultado.append(municipio).append(": ");
+        resultado.append(String.format("%s: ", grafo));
 
-        for (Dados dados : dadosList) {
-            resultado.append(dados.getOrigem())
-                .append(" (").append(dados.getVizinho()).append(") - ")
-                .append(dados.getDistancia()).append(" km, ");
+        for (Grafo g : grafoList) {
+            resultado.append(String.format("%s (%s) - %.2f km, ", g.getOrigem(), g.getAdjacente(), g.getDistancia()));
         }
 
         // Remove a vírgula do final
@@ -68,14 +61,6 @@ public class Leitor {
         }
 
         return resultado.toString();
-    }
-
-    private static int tryParseInt(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
     }
 
     private static double tryParseDouble(String value) {

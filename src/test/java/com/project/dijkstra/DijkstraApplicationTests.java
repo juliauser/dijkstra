@@ -4,75 +4,39 @@ import com.project.dijkstra.Dijkstra;
 import com.project.dijkstra.Grafo;
 import com.project.dijkstra.No;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.FileReader;
+import java.util.Scanner;
 
-import java.util.List;
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
+import com.opencsv.CSVReader;
+import com.project.csv.Leitor;
 
 class DijkstraApplicationTests {
 
-	@Test
 	public static void main(String[] args) {
-        No nodeA = new No("A");
-        No nodeB = new No("B");
-        No nodeC = new No("C");
-        No nodeD = new No("D");
-        No nodeE = new No("E");
-        No nodeF = new No("F");
 
-        nodeA.addDestination(nodeB, 10);
-        nodeA.addDestination(nodeC, 15);
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Qual o ponto de partida?");
+        String partida = sc.nextLine();
 
-        nodeB.addDestination(nodeD, 12);
-        nodeB.addDestination(nodeF, 15);
+        System.out.println("Qual o ponto de chegada?");
+        String destino = sc.nextLine();
 
-        nodeC.addDestination(nodeE, 10);
+        Grafo grafo = new Grafo(7, partida, destino);
+        Leitor.LerCSVAdicionarAoGrafo(grafo, "src/main/java/com/project/csv/csv.csv");
 
-        nodeD.addDestination(nodeE, 2);
-        nodeD.addDestination(nodeF, 1);
 
-        nodeF.addDestination(nodeE, 5);
+        No noOrigem = grafo.getNoPeloNome(partida);
+        No noDestino = grafo.getNoPeloNome(destino);
 
-        Graph graph = new Graph();
+        Dijkstra.calcularCaminhoMaisCurto(grafo, noOrigem, noDestino);
 
-        graph.addNode(nodeA);
-        graph.addNode(nodeB);
-        graph.addNode(nodeC);
-        graph.addNode(nodeD);
-        graph.addNode(nodeE);
-        graph.addNode(nodeF);
-
-        graph = Dijkstra.calculateShortestPathFromSource(graph, nodeA);
-
-        //after the calculation the shortest path distance attributes are set for each node in the graph
-    
-        List <No> shortestPathForNodeB = Arrays.asList(nodeA);
-        List <No> shortestPathForNodeC = Arrays.asList(nodeA);
-        List <No> shortestPathForNodeD = Arrays.asList(nodeA, nodeB);
-        List <No> shortestPathForNodeE = Arrays.asList(nodeA, nodeB, nodeD);
-        List <No> shortestPathForNodeF = Arrays.asList(nodeA, nodeB, nodeD);
-
-        for (No node : graph.getNodes()) {
-            switch (node.getName()) {
-                case "B":
-                    assertTrue(node.getShortestPath().equals(shortestPathForNodeB));
-                    break;
-                case "C":
-                    assertTrue(node.getShortestPath().equals(shortestPathForNodeC));
-                    break;
-                case "D":
-                    assertTrue(node.getShortestPath().equals(shortestPathForNodeD));
-                    break;
-                case "E":
-                    assertTrue(node.getShortestPath().equals(shortestPathForNodeE));
-                    break;
-                case "F":
-                    assertTrue(node.getShortestPath().equals(shortestPathForNodeF));
-                    break;
-            }
+        for (No no : grafo.getNos()) {
+            System.out.println("Caminho mais curto de " + noOrigem.getNome() + " para " + no.getNome() + ": " + no.getCaminhoMaisCurto());
+            System.out.println("Distância: " + no.getDistancia());
+            System.out.println("-----------------------------");
         }
-    }
 
+        sc.close();
+    }
 }

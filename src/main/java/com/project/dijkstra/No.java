@@ -12,18 +12,18 @@ public class No {
     // Lista de nós que descreve o caminho mais curto calculado a partir do nó de origem
     private LinkedList<No> caminhoMaisCurto = new LinkedList<>();
 
-    // Todas as distâncias de nó são inicializadas com o valor MAX por padrão
-    private Integer distancia = Integer.MAX_VALUE;
+    private double distancia = Double.POSITIVE_INFINITY;
 
     // adjacentNodes é usado para associar vizinhos com o comprimento da aresta
-    private Map<No, Integer> nosAdjacentes = new HashMap<>();
+    private Map<No, Double> nosAdjacentes = new HashMap<>();
 
     public No(String nome) {
         this.nome = nome;
     }
 
-    public void adicionarDestino(No destino, int distancia) {
+    public void adicionarDestino(No destino, double distancia) {
         nosAdjacentes.put(destino, distancia);
+        destino.getNosAdjacentes().put(this, distancia); //adiciona a aresta no sentido oposto para grafos não direcionados
     }
 
     public String getNome() {
@@ -42,19 +42,24 @@ public class No {
         this.caminhoMaisCurto = caminhoMaisCurto;
     }
 
-    public Integer getDistancia() {
+    public double getDistancia() {
         return distancia;
     }
 
-    public void setDistancia(Integer distancia) {
+    public void setDistancia(double distancia) {
         this.distancia = distancia;
     }
 
-    public Map<No, Integer> getNosAdjacentes() {
+    public Map<No, Double> getNosAdjacentes() {
         return nosAdjacentes;
     }
 
-    public void setNosAdjacentes(Map<No, Integer> nosAdjacentes) {
+    public void setNosAdjacentes(Map<No, Double> nosAdjacentes) {
         this.nosAdjacentes = nosAdjacentes;
+    }
+    
+    public void adicionarAresta(No destino, double distancia) {
+        nosAdjacentes.put(destino, distancia);
+        destino.getNosAdjacentes().put(this, distancia); //adiciona a aresta no sentido oposto
     }
 }

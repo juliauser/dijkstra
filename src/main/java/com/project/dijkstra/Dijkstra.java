@@ -7,8 +7,7 @@ import java.util.Set;
 
 public class Dijkstra {
 
-    //retorna o grafo com 
-    public static Grafo calcularCaminhoMaisCurto(Grafo grafo, No origem) {
+    public static Grafo calcularCaminhoMaisCurto(Grafo grafo, No origem, No destino) {
         
         origem.setDistancia(0);
 
@@ -21,9 +20,9 @@ public class Dijkstra {
             No noAtual = obterNoComMenorDistancia(nosNaoVisitados);
             nosNaoVisitados.remove(noAtual);
 
-            for (Entry <No, Integer> parAdjacencia : noAtual.getNosAdjacentes().entrySet()) {
+            for (Entry <No, Double> parAdjacencia : noAtual.getNosAdjacentes().entrySet()) {
                 No noAdjacente = parAdjacencia.getKey();
-                Integer pesoAresta = parAdjacencia.getValue();
+                Double pesoAresta = parAdjacencia.getValue();
                 
                 if (!nosVisitados.contains(noAdjacente)) {
                     calcularDistanciaMinima(noAdjacente, pesoAresta, noAtual);
@@ -31,6 +30,11 @@ public class Dijkstra {
                 }
             }
             nosVisitados.add(noAtual);
+
+            //fazer o loop até atingir o nó destino
+            if (noAtual.equals(destino)) {
+                break;
+            }
         }
         return grafo;
     }
@@ -38,10 +42,10 @@ public class Dijkstra {
     //Retorna o nó com a menor distância do conjunto de nós não visitados
     private static No obterNoComMenorDistancia(Set <No> nosNaoVisitados) {
         No noComMenorDistancia = null;
-        int menorDistancia = Integer.MAX_VALUE;
+        double menorDistancia = Double.MAX_VALUE;
         
         for (No no : nosNaoVisitados) {
-            int distanciaNo = no.getDistancia();
+            double distanciaNo = no.getDistancia();
             
             if(distanciaNo < menorDistancia) {
                 menorDistancia = distanciaNo;
@@ -52,8 +56,8 @@ public class Dijkstra {
     }
 
     //compara a distancia atual com a recem calculada enquanto segue o novo caminho explorado
-    private static void calcularDistanciaMinima(No noAvaliado, Integer pesoAresta, No noOrigem) {
-        Integer distanciaOrigem = noOrigem.getDistancia();
+    private static void calcularDistanciaMinima(No noAvaliado, Double pesoAresta, No noOrigem) {
+        double distanciaOrigem = noOrigem.getDistancia();
 
         if (distanciaOrigem + pesoAresta < noAvaliado.getDistancia()) {
             noAvaliado.setDistancia(distanciaOrigem + pesoAresta);

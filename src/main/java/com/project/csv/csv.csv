@@ -1,92 +1,90 @@
-,,,
-node,origem,vizinho,distancia
-1,Amaral Ferrador,Cristal (2),33
-1,Amaral Ferrador,São Lourenço do Sul (3),44
-1,Amaral Ferrador,Encruzilhada do Sul (21),58
-2,Cristal,Amaral Ferrador (1),33
-2,Cristal,São Lourenço do Sul (3),44
-2,Cristal,Ganguçu (20),121
-3,São Lourenço do Sul,Cristal (2),44
-3,São Lourenço do Sul,Turuçu (4),25
-3,São Lourenço do Sul,Pelotas (5),73
-3,São Lourenço do Sul,Canguçu (20),90
-3,São Lourenço do Sul,Arroio do Padre (24),53
-4,Turuçu,São Lourenço do Sul (3),25
-4,Turuçu,Pelotas (5),48
-5,Pelotas,São Lourenço do Sul (3),73
-5,Pelotas,Turuçu (4),48
-5,Pelotas,Morro Redondo (6),46
-5,Pelotas,Capão do Leão (9),20
-5,Pelotas,Rio Grande (10),60
-5,Pelotas,Canguçu (20),56
-5,Pelotas,Arroio do Padre (24),35
-6,Morro Redondo,Pelotas (5),46
-6,Morro Redondo,Cerrito (7),34
-6,Morro Redondo,Capão do Leão (9),38
-6,Morro Redondo,Canguçu (20),30
-7,Cerrito,Morro Redondo (6),46
-7,Cerrito,Pedro Osório (8),1
-7,Cerrito,Capão do Leão (9),34
-7,Cerrito,Piratini (19),62
-7,Cerrito,Canguçu (20),80
-8,Pedro Osório,Cerrito (7),1
-8,Pedro Osório,Capão do Leão (9),43
-8,Pedro Osório,Arroio Grande (14),62
-8,Pedro Osório,Herval (16),73
-9,Capão do Leão,Pelotas (5),20
-9,Capão do Leão,Morro Redondo (6),50
-9,Capão do Leão,Cerrito (7),51
-9,Capão do Leão,Pedro Osório (8),43
-9,Capão do Leão,Rio Grande (10),71
-9,Capão do Leão,Arroio Grande (14),81
-10,Rio Grande ,Pelotas (5),60
-10,Rio Grande ,Capão do Leão (9),71
-10,Rio Grande ,São José do Norte (11),224
-10,Rio Grande ,Santa Vitória do Palmar (12),149
-11,São José do Norte,Rio Grande (10),8
-12,Santa Vitória do Palmar,Rio Grande (10),224
-12,Santa Vitória do Palmar,Chuí (13),22
-13,Chuí,Santa Vitória do Palmar (12),22
-14,Arroio Grande,Pedro Osório (8),62
-14,Arroio Grande,Capão do Leão (9),81
-14,Arroio Grande,Jaguarão (15),49
-14,Arroio Grande,Herval (16),48
-15,Jaguarão,Arroio Grande (14),49
-15,Jaguarão,Herval (16),95
-16,Herval,Pedro Osório (8),73
-16,Herval,Arroio Grande (14),48
-16,Herval,Jaguarão (15),95
-16,Herval,Piratini (19),127
-16,Herval,Pedras Altas (25),48
-17,Candiota,Pinheiro Machado (18),46
-18,Pinheiro Machado,Candiota (17),46
-18,Pinheiro Machado,Piratini (19),79
-18,Pinheiro Machado,Santana da Boa Vista (22),132
-18,Pinheiro Machado,Pedras Altas (25),32
-19,Piratini,Cerrito (7),62
-19,Piratini,Herval (16),127
-19,Piratini,Canguçu (20),61
-19,Piratini,Santana da Boa Vista (22),91
-20,Canguçu,Amaral Ferrador (1),118
-20,Canguçu,Cristal (2),121
-20,Canguçu,São Lourenço do Sul (3),90
-20,Canguçu,Pelotas (5),56
-20,Canguçu,Cerrito (7),80
-20,Canguçu,Piratini (19),61
-20,Canguçu,Encruzilhada do Sul (21),126
-20,Canguçu,Arroio do Padre (24),35
-21,Encruzilhada do Sul,Amaral Ferrador (1),58
-21,Encruzilhada do Sul,Piratini (19),157
-21,Encruzilhada do Sul,Canguçu (20),126
-21,Encruzilhada do Sul,Santana da Boa Vista (22),145
-22,Santana da Boa Vista,Pinheiro Machado (18),132
-22,Santana da Boa Vista,Piratini (19),91
-22,Santana da Boa Vista,Encruzilhada do Sul (21),145
-22,Santana da Boa Vista,Caçapava do Sul (23),62
-23,Caçapava do Sul,Santana da Boa Vista (22),62
-24,Arroio do Padre,São Lourenço do Sul (3),53
-24,Arroio do Padre,Turuçu (4),28
-24,Arroio do Padre,Pelotas (5),43
-24,Arroio do Padre,Canguçu (20),35
-25,Pedras Altas,Herval (16),48
-25,Pedras Altas,Pinheiro Machado (18),32
+Amaral Ferrador,Cristal,33
+Amaral Ferrador,São Lourenço do Sul,44
+Amaral Ferrador,Encruzilhada do Sul,58
+Cristal,Amaral Ferrador,33
+Cristal,São Lourenço do Sul,44
+Cristal,Ganguçu,121
+São Lourenço do Sul,Cristal,44
+São Lourenço do Sul,Turuçu,25
+São Lourenço do Sul,Pelotas,73
+São Lourenço do Sul,Canguçu,90
+São Lourenço do Sul,Arroio do Padre,53
+Turuçu,São Lourenço do Sul,25
+Turuçu,Pelotas,48
+Pelotas,São Lourenço do Sul,73
+Pelotas,Turuçu,48
+Pelotas,Morro Redondo,46
+Pelotas,Capão do Leão,20
+Pelotas,Rio Grande ,60
+Pelotas,Canguçu,56
+Pelotas,Arroio do Padre,35
+Morro Redondo,Pelotas,46
+Morro Redondo,Cerrito,34
+Morro Redondo,Capão do Leão,38
+Morro Redondo,Canguçu ,30
+Cerrito,Morro Redondo,46
+Cerrito,Pedro Osório,1
+Cerrito,Capão do Leão,34
+Cerrito,Piratini,62
+Cerrito,Canguçu ,80
+Pedro Osório,Cerrito,1
+Pedro Osório,Capão do Leão,43
+Pedro Osório,Arroio Grande ,62
+Pedro Osório,Herval ,73
+Capão do Leão,Pelotas,20
+Capão do Leão,Morro Redondo,50
+Capão do Leão,Cerrito,51
+Capão do Leão,Pedro Osório,43
+Capão do Leão,Rio Grande,71
+Capão do Leão,Arroio Grande ,81
+Rio Grande ,Pelotas,60
+Rio Grande ,Capão do Leão,71
+Rio Grande ,São José do Norte,224
+Rio Grande ,Santa Vitória do Palmar,149
+São José do Norte,Rio Grande ,8
+Santa Vitória do Palmar,Rio Grande ,224
+Santa Vitória do Palmar,Chuí ,22
+Chuí,Santa Vitória do Palmar ,22
+Arroio Grande,Pedro Osório,62
+Arroio Grande,Capão do Leão,81
+Arroio Grande,Jaguarão ,49
+Arroio Grande,Herval,48
+Jaguarão,Arroio Grande,49
+Jaguarão,Herval,95
+Herval,Pedro Osório,73
+Herval,Arroio Grande ,48
+Herval,Jaguarão ,95
+Herval,Piratini ,127
+Herval,Pedras Altas ,48
+Candiota,Pinheiro Machado,46
+Pinheiro Machado,Candiota ,46
+Pinheiro Machado,Piratini ,79
+Pinheiro Machado,Santana da Boa Vista ,132
+Pinheiro Machado,Pedras Altas ,32
+Piratini,Cerrito,62
+Piratini,Herval,127
+Piratini,Canguçu,61
+Piratini,Santana da Boa Vista,91
+Canguçu,Amaral Ferrador,118
+Canguçu,Cristal,121
+Canguçu,São Lourenço do Sul,90
+Canguçu,Pelotas,56
+Canguçu,Cerrito,80
+Canguçu,Piratini ,61
+Canguçu,Encruzilhada do Sul,126
+Canguçu,Arroio do Padre,35
+Encruzilhada do Sul,Amaral Ferrador,58
+Encruzilhada do Sul,Piratini,157
+Encruzilhada do Sul,Canguçu,126
+Encruzilhada do Sul,Santana da Boa Vista,145
+Santana da Boa Vista,Pinheiro Machado,132
+Santana da Boa Vista,Piratini,91
+Santana da Boa Vista,Encruzilhada do Sul,145
+Santana da Boa Vista,Caçapava do Sul ,62
+Caçapava do Sul,Santana da Boa Vista,62
+Arroio do Padre,São Lourenço do Sul,53
+Arroio do Padre,Turuçu,28
+Arroio do Padre,Pelotas,43
+Arroio do Padre,Canguçu,35
+Pedras Altas,Herval ,48
+Pedras Altas,Pinheiro Machado,32
