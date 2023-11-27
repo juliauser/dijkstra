@@ -26,17 +26,12 @@ public class Grafo {
         return no;
     }
 
-
     public Set<No> getNos() {
         return nos;
     }
 
     public void setNos(Set<No> nos) {
         this.nos = nos;
-    }
-
-    public String getOrigem() {
-        return origem;
     }
 
     public String getAdjacente() {

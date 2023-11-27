@@ -8,16 +8,13 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Leitor {
-    private static final String csv = "src/main/java/com/project/csv/csv.csv";
 
-    public static void LerCSVAdicionarAoGrafo(Grafo grafo, String csv) {
-        try (CSVReader reader = new CSVReader(new FileReader(csv))) {
+    public static void LerCSVAdicionarAoGrafo(Grafo grafo, String caminhoCsv) {
+        
+        try (CSVReader reader = new CSVReader(new FileReader(caminhoCsv))) {
             String[] colunas;
 
             while ((colunas = reader.readNext()) != null) {
@@ -36,7 +33,6 @@ public class Leitor {
                     noAdjacente = new No(adjacente);
                     grafo.adicionarNo(noAdjacente);
                 }
-
 
                 grafo.adicionarAresta(no, noAdjacente, distancia);
 
